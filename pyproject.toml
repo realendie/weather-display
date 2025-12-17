@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "weather-display"
+version = "0.1"
+description = "A TUI Weather Display."
+authors = [{ name = "Wyatt Johnson", email = "enderprooffical@gmail.com" }]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.8"
