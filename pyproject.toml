@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "weather-display"
-version = "0.1"
+version = "0.1.0"
 description = "A TUI Weather Display."
 authors = [{ name = "Wyatt Johnson", email = "enderprooffical@gmail.com" }]
 readme = "README.md"
