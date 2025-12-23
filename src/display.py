@@ -1,17 +1,18 @@
 import pytermgui as ptg
 
 with ptg.WindowManager() as manager:
-    location = "No Location Specified"
+    location = 'NewYork City, NY'
     tempurature = 94
+    weather_type = 'Rainy'
+    wind = '340/10'
 
     window = (
         ptg.Window(
-            ptg.Splitter(
-                ptg.Label(f"[bold]{location}", parent_align=0),
-                ptg.Label(f"[bold]Tempurature: {tempurature}"),
-            )
+            ptg.Label(location, parent_align=0),
+            "",
+            ptg.Label(f'Tempurature: {tempurature}', parent_align=0),
         )
-        .set_title("weather-display")
+        .set_title('weather-display')
         .center()
     )
 
