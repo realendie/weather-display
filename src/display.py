@@ -16,13 +16,14 @@ from backend import current_temp, current_wind_speed, current_wind_dir, precip_t
 
 with ptg.WindowManager() as manager:
     manager.layout.add_slot("body")
-
+    
+    if temperature_unit == "fahrenheit":
+        temp_display_unit = "°F"
+    elif temp_display_unit == "celcius":
+        temp_display_unit = "°C"
     # Create two columns using Splitter
     left_column = ptg.Container(
-    if temperature_unit == "fahrenheit":
-        ptg.Label(f"Tempurature: {current_temp} °F")
-    elif temperature_unit == "celcius":
-        ptg.Label(f"Tempurature: {current_temp} °C")
+        ptg.Label(f"Tempurature: {current_temp} {temp_display_unit}"),
         ptg.Label("Precipitation: Rain", wrap=False),
     )
     
