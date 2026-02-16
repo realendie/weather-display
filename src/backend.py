@@ -39,6 +39,13 @@ current_temp = current["temperature"]
 current_wind_speed = current["windspeed"]
 current_wind_dir = current["winddirection"]
 
+hourly = data["hourly"]
+
+precip_amount = hourly["precipitation"][0]
+precip_probability = hourly["precipitation_probability"][0]
+weather_code = hourly["weathercode"][0]
+precip_type, intensity = get_weather_info(weather_code)
+
 def display_data():
     if  temperature_unit == "fahrenheit":
         print(f"Temperature: {current_temp} °F")
@@ -46,13 +53,6 @@ def display_data():
         print(f"Temperature: {current_temp} °C")
 
     print(f"Wind: {current_wind_speed} {windspeed_unit} @ {current_wind_dir}°")
-
-    hourly = data["hourly"]
-
-    precip_amount = hourly["precipitation"][0]
-    precip_probability = hourly["precipitation_probability"][0]
-    weather_code = hourly["weathercode"][0]
-    precip_type, intensity = get_weather_info(weather_code)
 
     if intensity is not None:
         print(f"Preciptiation: {intensity} {precip_type}")
