@@ -1,4 +1,16 @@
+import configparser
 import pytermgui as ptg
+
+from config.weather_codes import get_weather_info
+
+config = configparser.ConfigParser()
+config.read('config/config.ini')
+
+temperature_unit = config.get('CONFIG', 'temperature_unit')
+windspeed_unit = config.get('CONFIG', 'windspeed_unit')
+precipitation_unit = config.get('CONFIG', 'precipitation_unit')
+timezone = config.get('CONFIG', 'timezone')
+
 
 from backend import current_temp, current_wind_speed, current_wind_dir, precip_type, precip_probability, precip_amount
 
