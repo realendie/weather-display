@@ -19,7 +19,10 @@ with ptg.WindowManager() as manager:
 
     # Create two columns using Splitter
     left_column = ptg.Container(
-        ptg.Label(f"Temp: 67", wrap=False),
+    if temperature_unit == "fahrenheit":
+        ptg.Label(f"Tempurature: {current_temp} °F")
+    elif temperature_unit == "celcius":
+        ptg.Label(f"Tempurature: {current_temp} °C")
         ptg.Label("Precipitation: Rain", wrap=False),
     )
     
