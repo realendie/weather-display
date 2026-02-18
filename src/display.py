@@ -1,3 +1,5 @@
+import os
+import sys
 import configparser
 import pytermgui as ptg
 
@@ -12,6 +14,13 @@ precipitation_unit = config.get('CONFIG', 'precipitation_unit')
 timezone = config.get('CONFIG', 'timezone')
 
 from backend import current_temp, current_wind_speed, current_wind_dir, precip_type, precip_probability, precip_amount, intensity
+
+def quit_func():
+    quit()
+
+def reload_data():
+    python = sys.executable
+    os.execv(python, [python] + sys.argv)
 
 with ptg.WindowManager() as manager:
     manager.layout.add_slot("body")
@@ -45,9 +54,14 @@ with ptg.WindowManager() as manager:
     # Splitter will create two columns
     splitter = ptg.Splitter(left_column, right_column)
 
+    quit_button = ptg.Button("Quit", onclick=quit_func)
+    reload_button = ptg.Button("Reload Data", onclick=reload_data)
+    button_split = ptg.Splitter(quit_button, reload_button)
+
     window = (
         ptg.Window(
             splitter,
+            button_split,
             width=0,
         )
         .set_title("weather-display")
