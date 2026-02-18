@@ -1,6 +1,8 @@
 certifi==2026.1.4
 charset-normalizer==3.4.4
 configparser==7.2.0
+geographiclib==2.1
+geopy==2.4.1
 idna==3.11
 PyTermGUI==7.7.4
 requests==2.32.5
