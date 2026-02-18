@@ -18,7 +18,8 @@ from backend import current_temp, current_wind_speed, current_wind_dir, precip_t
 def quit_func():
     quit()
 
-def reload_data():
+def reload_data(manager):
+    manager.stop()
     python = sys.executable
     os.execv(python, [python] + sys.argv)
 
@@ -27,7 +28,7 @@ with ptg.WindowManager() as manager:
 
     if temperature_unit == "fahrenheit":
         temp_display_unit = "°F"
-    elif temp_display_unit == "celcius":
+    elif temperature_unit == "celcius":
         temp_display_unit = "°C"
 
     if intensity is not None:
@@ -55,7 +56,7 @@ with ptg.WindowManager() as manager:
     splitter = ptg.Splitter(left_column, right_column)
 
     quit_button = ptg.Button("Quit", onclick=quit_func)
-    reload_button = ptg.Button("Reload Data", onclick=reload_data)
+    reload_button = ptg.Button("Reload Data", onclick=lambda *_: reload_data(manager))
     button_split = ptg.Splitter(quit_button, reload_button)
 
     window = (
