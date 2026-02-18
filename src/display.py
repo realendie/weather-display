@@ -48,9 +48,9 @@ with ptg.WindowManager() as manager:
     window = (
         ptg.Window(
             splitter,
-            width=0,  # Auto-size
+            width=0,
         )
         .set_title("weather-display")
     )
 
-    manager.add(window, assign="body")
+    manager.add(window)
