@@ -28,7 +28,7 @@ with ptg.WindowManager() as manager:
     # Create two columns using Splitter
     left_column = ptg.Container(
         ptg.Label(f"Tempurature: {current_temp} {temp_display_unit}", wrap=False),
-        ptg.Label(f"Wind: {current_wind_speed} {windspeed_unit} @ {current_wind_dir}", wrap=False),
+        ptg.Label(f"Wind: {current_wind_speed} {windspeed_unit} @ {current_wind_dir}°", wrap=False),
     )
     
     if precipitation_unit == 'inch':
