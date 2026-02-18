@@ -1,5 +1,7 @@
 import requests
 import configparser
+import geopy.geocoders import Nominatim
+import time
 
 from config.weather_codes import get_weather_info
 
@@ -14,6 +16,17 @@ timezone = config.get('CONFIG', 'timezone')
 # Example location: Knoxville, TN
 LAT = 35.9606
 LON = -83.9207
+
+def cords_to_city(LAT, LON):
+    geolocator = Nominatim(user_agent="weather-display")
+    time.sleep(1)
+    location = geolocator.reverse(f"{LAT},{LON}")
+
+    city = address.get("city", "")
+    state = address.get("state", "")
+    country = address.get("country", "")
+
+
 
 url = "https://api.open-meteo.com/v1/forecast"
 
