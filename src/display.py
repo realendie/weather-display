@@ -38,7 +38,7 @@ with ptg.WindowManager() as manager:
 
     right_column = ptg.Container(
         ptg.Label(precip_display),
-        ptg.Label(f"Chance: {precip_probability}", wrap=False),
+        ptg.Label(f"Chance: %{precip_probability}", wrap=False),
         ptg.Label(f"Accumulation: {precip_amount} {precip_unit_display}")
     )
 
