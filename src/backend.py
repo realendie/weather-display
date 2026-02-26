@@ -1,6 +1,6 @@
 import requests
 import configparser
-import geopy.geocoders import Nominatim
+from geopy.geocoders import Nominatim
 import time
 
 from config.weather_codes import get_weather_info
