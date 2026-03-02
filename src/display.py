@@ -13,7 +13,7 @@ windspeed_unit = config.get('CONFIG', 'windspeed_unit')
 precipitation_unit = config.get('CONFIG', 'precipitation_unit')
 timezone = config.get('CONFIG', 'timezone')
 
-from backend import current_temp, current_wind_speed, current_wind_dir, precip_type, precip_probability, precip_amount, intensity
+from backend import current_temp, current_wind_speed, current_wind_dir, precip_type, precip_probability, precip_amount, intensity, city, state, country
 
 def quit_func(button):
     quit()
@@ -37,6 +37,7 @@ with ptg.WindowManager() as manager:
         precip_display = f"Precipitation: {precip_type}"
     # Create two columns using Splitter
     left_column = ptg.Container(
+        ptg.Label(f"Location: {city}, {state} {country}"),
         ptg.Label(f"Tempurature: {current_temp} {temp_display_unit}", wrap=False),
         ptg.Label(f"Wind: {current_wind_speed} {windspeed_unit} @ {current_wind_dir}°", wrap=False),
     )
