@@ -1,3 +1,5 @@
+import os
+import sys
 import configparser
 import pytermgui as ptg
 
@@ -13,12 +15,20 @@ timezone = config.get('CONFIG', 'timezone')
 
 from backend import current_temp, current_wind_speed, current_wind_dir, precip_type, precip_probability, precip_amount, intensity
 
+def quit_func():
+    quit()
+
+def reload_data(manager):
+    manager.stop()
+    python = sys.executable
+    os.execv(python, [python] + sys.argv)
+
 with ptg.WindowManager() as manager:
     manager.layout.add_slot("body")
 
     if temperature_unit == "fahrenheit":
         temp_display_unit = "°F"
-    elif temp_display_unit == "celcius":
+    elif temperature_unit == "celcius":
         temp_display_unit = "°C"
 
     if intensity is not None:
@@ -30,7 +40,7 @@ with ptg.WindowManager() as manager:
         ptg.Label(f"Tempurature: {current_temp} {temp_display_unit}", wrap=False),
         ptg.Label(f"Wind: {current_wind_speed} {windspeed_unit} @ {current_wind_dir}°", wrap=False),
     )
-
+    
     if precipitation_unit == 'inch':
         precip_unit_display = "in"
     elif precipitation_unit == "centimeters":
@@ -38,19 +48,25 @@ with ptg.WindowManager() as manager:
 
     right_column = ptg.Container(
         ptg.Label(precip_display),
-        ptg.Label(f"Chance: {precip_probability}", wrap=False),
+        ptg.Label(f"Chance: %{precip_probability}", wrap=False),
         ptg.Label(f"Accumulation: {precip_amount} {precip_unit_display}")
     )
 
     # Splitter will create two columns
     splitter = ptg.Splitter(left_column, right_column)
 
+    quit_button = ptg.Button("Quit", onclick=quit_func)
+    reload_button = ptg.Button("Reload Data", onclick=lambda *_: reload_data(manager))
+    button_split = ptg.Splitter(quit_button, reload_button)
+
     window = (
         ptg.Window(
             splitter,
-            width=0,  # Auto-size
+            button_split,
+            width=0,
         )
         .set_title("weather-display")
     )
 
-    manager.add(window, assign="body")
+    manager.add(window)
+
