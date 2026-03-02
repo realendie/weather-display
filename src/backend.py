@@ -1,5 +1,7 @@
 import requests
 import configparser
+from geopy.geocoders import Nominatim
+import time
 
 from config.weather_codes import get_weather_info
 
@@ -14,6 +16,19 @@ timezone = config.get('CONFIG', 'timezone')
 # Example location: Knoxville, TN
 LAT = 35.9606
 LON = -83.9207
+
+def cords_to_city(LAT, LON):
+    geolocator = Nominatim(user_agent="weather-display")
+    time.sleep(1)
+    location = geolocator.reverse(f"{LAT},{LON}")
+
+    address = location.raw.get('address', {})
+
+    city = address.get("city", "")
+    state = address.get("state", "")
+    country = address.get("country", "")
+
+    return city, state, country
 
 url = "https://api.open-meteo.com/v1/forecast"
 
@@ -39,20 +54,22 @@ current_temp = current["temperature"]
 current_wind_speed = current["windspeed"]
 current_wind_dir = current["winddirection"]
 
+hourly = data["hourly"]
+
+precip_amount = hourly["precipitation"][0]
+precip_probability = hourly["precipitation_probability"][0]
+weather_code = hourly["weathercode"][0]
+precip_type, intensity = get_weather_info(weather_code)
+
 def display_data():
+    print(f"Location: {city}, {state} {country}")
+
     if  temperature_unit == "fahrenheit":
         print(f"Temperature: {current_temp} °F")
     elif temperature_unit == "celcius":
         print(f"Temperature: {current_temp} °C")
 
     print(f"Wind: {current_wind_speed} {windspeed_unit} @ {current_wind_dir}°")
-
-    hourly = data["hourly"]
-
-    precip_amount = hourly["precipitation"][0]
-    precip_probability = hourly["precipitation_probability"][0]
-    weather_code = hourly["weathercode"][0]
-    precip_type, intensity = get_weather_info(weather_code)
 
     if intensity is not None:
         print(f"Preciptiation: {intensity} {precip_type}")
@@ -66,4 +83,6 @@ def display_data():
     elif precipitation_unit == 'centimeter':
         print(f"Accumulation: {precip_amount} cm")
 
+cords_to_city(LAT, LON)
+city, state, country = cords_to_city(LAT, LON)
 display_data()
