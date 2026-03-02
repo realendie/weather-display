@@ -15,7 +15,7 @@ timezone = config.get('CONFIG', 'timezone')
 
 from backend import current_temp, current_wind_speed, current_wind_dir, precip_type, precip_probability, precip_amount, intensity
 
-def quit_func():
+def quit_func(button):
     quit()
 
 def reload_data(manager):
@@ -40,7 +40,7 @@ with ptg.WindowManager() as manager:
         ptg.Label(f"Tempurature: {current_temp} {temp_display_unit}", wrap=False),
         ptg.Label(f"Wind: {current_wind_speed} {windspeed_unit} @ {current_wind_dir}°", wrap=False),
     )
-    
+
     if precipitation_unit == 'inch':
         precip_unit_display = "in"
     elif precipitation_unit == "centimeters":
