@@ -56,8 +56,8 @@ with ptg.WindowManager() as manager:
     # Splitter will create two columns
     splitter = ptg.Splitter(left_column, right_column)
 
-    quit_button = ptg.Button("Quit", onclick=quit_func)
-    reload_button = ptg.Button("Reload Data", onclick=lambda *_: reload_data(manager))
+    quit_button = ptg.KeyboardButton("Quit", onclick=quit_func, bound="Q"),
+    reload_button = ptg.KeyboardButton("Reload Data", onclick=lambda *_: reload_data(manager), bound="R"),
     button_split = ptg.Splitter(quit_button, reload_button)
 
     window = (
