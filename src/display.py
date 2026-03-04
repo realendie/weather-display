@@ -5,6 +5,8 @@ import pytermgui as ptg
 
 from config.weather_codes import get_weather_info
 
+print ("Loading data...")
+
 config = configparser.ConfigParser()
 config.read('config/config.ini')
 
@@ -20,6 +22,11 @@ def quit_func(button):
 
 def reload_data(manager):
     manager.stop()
+    if os.name == "nt":
+        _ = os.system("cls")
+    else:
+        _ = os.system("clear")
+    print("Loading data...")
     python = sys.executable
     os.execv(python, [python] + sys.argv)
 
