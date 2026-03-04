@@ -26,7 +26,6 @@ def reload_data(manager):
         _ = os.system("cls")
     else:
         _ = os.system("clear")
-    print("Loading data...")
     python = sys.executable
     os.execv(python, [python] + sys.argv)
 
