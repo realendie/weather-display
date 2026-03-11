@@ -32,18 +32,6 @@ def reload_data(manager):
 with ptg.WindowManager() as manager:
     manager.layout.add_slot("body")
 
-    # Location Input
-    city_field = ptg.InputField(prompt="City: "),
-    state_field = ptg.InputField(prompt="State: "),
-    country_field = ptg.InputField(prompt="Country: "),
-
-    location_fields = ptg.Container(
-        city_field,
-        state_field,
-        country_field,
-        horiztonal=True
-    )
-
     if temperature_unit == "fahrenheit":
         temp_display_unit = "°F"
     elif temperature_unit == "celcius":
