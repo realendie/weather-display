@@ -1,8 +1,9 @@
 import pytermgui as ptg
 
 with ptg.WindowManager() as manager:
+    manager.layout.add_slot("body")
 
-    city_field = ptg.InputField(prompt="City: ", wrap=False),
+    city_field = ptg.InputField(prompt="City: "),
     state_field = ptg.InputField(prompt="State: "),
     country_field = ptg.InputField(prompt="Country: "),
 
