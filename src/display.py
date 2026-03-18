@@ -68,7 +68,6 @@ with ptg.WindowManager() as manager:
 
     window = (
         ptg.Window(
-            location_fields,
             splitter,
             button_split,
             width=0,
