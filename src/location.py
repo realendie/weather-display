@@ -38,5 +38,5 @@ def get_location():
         )
 
         manager.add(window)
-    
+
     return result
