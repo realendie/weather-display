@@ -3,12 +3,12 @@ import pytermgui as ptg
 def get_location():
     result = ("", "", "")
 
-    def submit_info(*_, button):
+    def submit_info(*_):
         nonlocal result
         result = (
-            city = city_field.value
-            state = state_field.value
-            country = country_field.value
+            city_field.value,
+            state_field.value,
+            country_field.value,
         )
         manager.stop()
 
