@@ -41,6 +41,7 @@ with ptg.WindowManager() as manager:
         precip_display = f"Precipitation: {intensity} {precip_type}"
     else:
         precip_display = f"Precipitation: {precip_type}"
+
     # Create two columns using Splitter
     left_column = ptg.Container(
         ptg.Label(f"Location: {city}, {state} {country}"),
