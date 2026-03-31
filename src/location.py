@@ -1,14 +1,22 @@
 import pytermgui as ptg
 from geopy.geocoders import Nominatim
+import os
+from dotenv import load_dotenv, find_dotenv, set_key
+
+dotenv_path = find_dotenv()
+
+if not dotenv_path:
+    dotenv_path = ".env"
 
 def submit_info(city, state, country):
     geolocator = Nominatim(user_agent="weather-display")
-    location = geolocator.geocode(f"{city}, {state}, {country}")
+    location = f"{city}, {state}, {country}"
 
-    if location:
-        return location.latitude, location.longitude
-    else:
-        return None
+    location_lat = location.latitude
+    location_lon = location.longitude
+
+    set_key(dotenv_path, "weather-display_lat", location_lat)
+    set_key(dotenv_path, "weather-display_lon", location_lon)
 
 with ptg.WindowManager() as manager:
     manager.layout.add_slot("body")
@@ -27,7 +35,7 @@ with ptg.WindowManager() as manager:
         country_field,
     )
 
-    submit_button = ptg.Button("Submit", onclick=submit_info)
+    submit_button = ptg.Button("Submit", onclick=lambda *_: submit_info(city, state, country))
 
     window = (
         ptg.Window(
@@ -38,4 +46,4 @@ with ptg.WindowManager() as manager:
         .set_title("Select Location")
     )
 
-manager.add(window)
+    manager.add(window)
