@@ -34,8 +34,8 @@ def submit_info(city, state, country):
     location_lat = location.latitude
     location_lon = location.longitude
 
-    set_key(dotenv_path, "weather-display_lat", location_lat)
-    set_key(dotenv_path, "weather-display_lon", location_lon)
+    config.set('LOCATION', 'location_lat', location_lat)
+    config.set('LOCATION', 'location_lon', location_lon)
 
 with ptg.WindowManager() as manager:
     manager.layout.add_slot("body")
