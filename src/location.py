@@ -29,13 +29,14 @@ def cords_to_city(LAT, LON):
 
 def submit_info(city, state, country):
     geolocator = Nominatim(user_agent="weather-display")
-    location = f"{city}, {state}, {country}"
+    query = f"{city}, {state}, {country}"
+    location = geolocator.geocode(query)
 
     location_lat = location.latitude
     location_lon = location.longitude
 
-    config.set('LOCATION', 'location_lat', location_lat)
-    config.set('LOCATION', 'location_lon', location_lon)
+    config.set('LOCATION', 'location_lat', str(location_lat))
+    config.set('LOCATION', 'location_lon', str(location_lon))
 
 with ptg.WindowManager() as manager:
     manager.layout.add_slot("body")
