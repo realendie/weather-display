@@ -1,12 +1,30 @@
 import pytermgui as ptg
 from geopy.geocoders import Nominatim
 import os
-from dotenv import load_dotenv, find_dotenv, set_key
+import configparser
+import time
 
-dotenv_path = find_dotenv()
+config = configparser.ConfigParser()
+config.read('config/config.ini')
 
-if not dotenv_path:
-    dotenv_path = ".env"
+LAT = config.get('LOCATION', 'location_lat')
+LON = config.get('LOCATION', 'location_lon')
+
+
+def cords_to_city(LAT, LON):
+    global city
+    global state
+    global country
+
+    geolocator = Nominatim(user_agent="weather-display")
+    time.sleep(1)
+    location = geolocator.reverse(f"{LAT},{LON}")
+
+    address = location.raw.get('address', {})
+
+    city = address.get("city", "")
+    state = address.get("state", "")
+    country = address.get("country", "")
 
 def submit_info(city, state, country):
     geolocator = Nominatim(user_agent="weather-display")
@@ -21,9 +39,11 @@ def submit_info(city, state, country):
 with ptg.WindowManager() as manager:
     manager.layout.add_slot("body")
 
-    city_field = ptg.InputField(prompt="City: ")
-    state_field = ptg.InputField(prompt="State: ")
-    country_field = ptg.InputField(prompt="Country: ")
+    cords_to_city(LAT, LON)
+
+    city_field = ptg.InputField(f"{city}", prompt="City: ")
+    state_field = ptg.InputField(f"{state}", prompt="State: ")
+    country_field = ptg.InputField(f"{country}", prompt="Country: ")
 
     city = city_field.value
     state = state_field.value
