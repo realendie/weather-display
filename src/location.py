@@ -1,3 +1,5 @@
+print ('Loading...')
+
 import pytermgui as ptg
 from geopy.geocoders import Nominatim
 import os
@@ -9,7 +11,6 @@ config.read('config/config.ini')
 
 LAT = config.get('LOCATION', 'location_lat')
 LON = config.get('LOCATION', 'location_lon')
-
 
 def cords_to_city(LAT, LON):
     global city
