@@ -13,9 +13,8 @@ windspeed_unit = config.get('CONFIG', 'windspeed_unit')
 precipitation_unit = config.get('CONFIG', 'precipitation_unit')
 timezone = config.get('CONFIG', 'timezone')
 
-# Example location: Knoxville, TN
-LAT = 35.9606
-LON = -83.9207
+LAT = config.get('LOCATION', 'location_lat')
+LON = config.get('LOCATION', 'location_lon')
 
 def cords_to_city(LAT, LON):
     geolocator = Nominatim(user_agent="weather-display")
