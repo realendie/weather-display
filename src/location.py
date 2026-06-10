@@ -5,6 +5,7 @@ from geopy.geocoders import Nominatim
 import os
 import configparser
 import time
+import subprocess
 
 config = configparser.ConfigParser()
 config.read('config/config.ini')
@@ -37,6 +38,12 @@ def submit_info(city, state, country):
 
     config.set('LOCATION', 'location_lat', str(location_lat))
     config.set('LOCATION', 'location_lon', str(location_lon))
+
+    with open('config/config.ini', 'w') as configfile:
+        config.write(configfile)
+
+    manager.stop()
+    subprocess.run(["python", "display.py"])
 
 with ptg.WindowManager() as manager:
     manager.layout.add_slot("body")
