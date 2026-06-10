@@ -206,4 +206,4 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
-config.ini
+config/config.ini # Application config file, blocked to prevent accidental commits during testing
