@@ -54,17 +54,17 @@ with ptg.WindowManager() as manager:
     state_field = ptg.InputField(f"{state}", prompt="State: ")
     country_field = ptg.InputField(f"{country}", prompt="Country: ")
 
-    city = city_field.value
-    state = state_field.value
-    country = country_field.value
-
     location_fields = ptg.Container(
         city_field,
         state_field,
         country_field,
     )
 
-    submit_button = ptg.Button("Submit", onclick=lambda *_: submit_info(city, state, country))
+    submit_button = ptg.Button("Submit", onclick=lambda *_: submit_info(
+        city_field.value,
+        state_field.value,
+        country_field.value,
+    ))
 
     window = (
         ptg.Window(
