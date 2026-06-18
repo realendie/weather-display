@@ -20,5 +20,5 @@ dependencies = [
 ]
 
 [project.scripts]
-weather-display = "display:main"
-weather-location = "location:main"
+weather-display = "weather-display.display:main"
+weather-location = "weather-display.location:main"
