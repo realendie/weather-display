@@ -1,6 +1,0 @@
-configparser==7.2.0
-geographiclib==2.1
-geopy==2.4.1
-PyTermGUI==7.7.4
-typing_extensions==4.15.0
-wcwidth==0.8.1
