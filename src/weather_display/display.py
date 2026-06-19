@@ -3,7 +3,7 @@ import sys
 import configparser
 import pytermgui as ptg
 
-from config.weather_codes import get_weather_info
+from .config.weather_codes import get_weather_info
 
 print ("Loading data...")
 
