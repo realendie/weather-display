@@ -46,7 +46,7 @@ def main():
             config.write(configfile)
 
         manager.stop()
-        subprocess.run(["python", "display.py"])
+        subprocess.run(["python", "-m", "weather_display.display"])
 
     with ptg.WindowManager() as manager:
         manager.layout.add_slot("body")
