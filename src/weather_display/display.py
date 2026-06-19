@@ -15,7 +15,7 @@ windspeed_unit = config.get('CONFIG', 'windspeed_unit')
 precipitation_unit = config.get('CONFIG', 'precipitation_unit')
 timezone = config.get('CONFIG', 'timezone')
 
-from weather_display.backend import (
+from .backend import (
     current_temp,
     current_wind_speed,
     current_wind_dir,
