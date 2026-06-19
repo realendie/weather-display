@@ -2,11 +2,13 @@ import requests
 import configparser
 from geopy.geocoders import Nominatim
 import time
+from pathlib import Path
 
 from .config.weather_codes import get_weather_info
 
 config = configparser.ConfigParser()
-config.read('config/config.ini')
+config_path = Path(__file__).parent / "config" / "config.ini"
+config.read(config_path)
 
 temperature_unit = config.get('CONFIG', 'temperature_unit')
 windspeed_unit = config.get('CONFIG', 'windspeed_unit')

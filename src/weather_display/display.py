@@ -2,13 +2,15 @@ import os
 import sys
 import configparser
 import pytermgui as ptg
+from pathlib import Path
 
 from .config.weather_codes import get_weather_info
 
 print ("Loading data...")
 
 config = configparser.ConfigParser()
-config.read('config/config.ini')
+config_path = Path(__file__).parent / "config" / "config.ini"
+config.read(config_path)
 
 temperature_unit = config.get('CONFIG', 'temperature_unit')
 windspeed_unit = config.get('CONFIG', 'windspeed_unit')

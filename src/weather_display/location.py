@@ -6,9 +6,11 @@ import os
 import configparser
 import time
 import subprocess
+from pathlib import Path
 
 config = configparser.ConfigParser()
-config.read('config/config.ini')
+config_path = Path(__file__).parent / "config" / "config.ini"
+config.read(config_path)
 
 LAT = config.get('LOCATION', 'location_lat')
 LON = config.get('LOCATION', 'location_lon')
@@ -39,7 +41,7 @@ def submit_info(city, state, country):
     config.set('LOCATION', 'location_lat', str(location_lat))
     config.set('LOCATION', 'location_lon', str(location_lon))
 
-    with open('config/config.ini', 'w') as configfile:
+    with open(config_path, 'w') as configfile:
         config.write(configfile)
 
     manager.stop()
