@@ -24,7 +24,6 @@ dependencies = [
     "urllib3",
     "wcwidth",
 ]
-```
 
 [project.scripts]
 weather-display = "weather_display.display:main"
