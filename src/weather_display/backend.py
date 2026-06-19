@@ -3,7 +3,7 @@ import configparser
 from geopy.geocoders import Nominatim
 import time
 
-from config.weather_codes import get_weather_info
+from weather_display.config.weather_codes import get_weather_info
 
 config = configparser.ConfigParser()
 config.read('config/config.ini')
