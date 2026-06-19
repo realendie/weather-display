@@ -59,7 +59,7 @@ with ptg.WindowManager() as manager:
     left_column = ptg.Container(
         ptg.Label(f"Location: {city}, {state} {country}"),
         ptg.Label(f"Tempurature: {current_temp} {temp_display_unit}", wrap=False),
-        ptg.Label(f"Wind: {current_wind_speed} {windspeed_unit} @ {current_wind_dir}°", wrap=False),
+        ptg.Label(f"Wind: {current_wind_dir}° @ {current_wind_speed} {windspeed_unit}", wrap=False),
     )
 
     if precipitation_unit == 'inch':
