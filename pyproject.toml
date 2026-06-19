@@ -11,13 +11,20 @@ readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.7"
 dependencies = [
+    "certifi",
+    "charset-normalizer",
     "configparser",
     "geographiclib",
     "geopy",
+    "idna",
+    "pathlib",
     "PyTermGUI",
+    "requests",
     "typing_extensions",
+    "urllib3",
     "wcwidth",
 ]
+```
 
 [project.scripts]
 weather-display = "weather_display.display:main"
