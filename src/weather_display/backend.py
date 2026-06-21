@@ -3,7 +3,7 @@ import configparser
 from geopy.geocoders import Nominatim
 import time
 from pathlib import Path
-from pathformdirs import user_config_dir
+from platformdirs import user_config_dir
 from importlib.resources import files
 import shutil
 
