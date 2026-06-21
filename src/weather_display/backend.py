@@ -19,11 +19,12 @@ def load_config():
         default_config = files("weather_display.config").joinpath("config.ini")
         shutil.copy(default_config, config_path)
 
+    global config
     config = configparser.ConfigParser()
     config.read(config_path)
 
-    return config
 
+load_config()
 temperature_unit = config.get('CONFIG', 'temperature_unit')
 windspeed_unit = config.get('CONFIG', 'windspeed_unit')
 precipitation_unit = config.get('CONFIG', 'precipitation_unit')
