@@ -23,7 +23,6 @@ def load_config():
     config = configparser.ConfigParser()
     config.read(config_path)
 
-
 load_config()
 temperature_unit = config.get('CONFIG', 'temperature_unit')
 windspeed_unit = config.get('CONFIG', 'windspeed_unit')
