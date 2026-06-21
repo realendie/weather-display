@@ -11,6 +11,7 @@ def main():
     from platformdirs import user_config_dir
     from importlib.resources import files
     import shutil
+    import sys
 
     config_dir = Path(user_config_dir("weather-display"))
     config_path = config_dir / "config.ini"
@@ -60,7 +61,7 @@ def main():
             config.write(configfile)
 
         manager.stop()
-        subprocess.run(["python", "-m", "weather_display.display"])
+        subprocess.run([sys.executable, "-m", "weather_display.display"])
 
     with ptg.WindowManager() as manager:
         manager.layout.add_slot("body")
