@@ -23,6 +23,7 @@ dependencies = [
     "typing_extensions",
     "urllib3",
     "wcwidth",
+    "platformdirs",
 ]
 
 [tool.setuptools.packages.find]
