@@ -91,8 +91,8 @@ def main():
         # Splitter will create two columns
         splitter = ptg.Splitter(left_column, right_column)
 
-        quit_button = ptg.KeyboardButton("Quit", onclick=quit_func, bound="Q"),
-        reload_button = ptg.KeyboardButton("Reload Data", onclick=lambda *_: reload_data(manager), bound="R"),
+        quit_button = ptg.KeyboardButton("Quit", onclick=quit_func, bound="Q")
+        reload_button = ptg.KeyboardButton("Reload Data", onclick=lambda *_: reload_data(manager), bound="R")
         button_split = ptg.Splitter(quit_button, reload_button)
 
         window = (
