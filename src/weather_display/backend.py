@@ -84,7 +84,7 @@ def display_data():
     elif temperature_unit == "celcius":
         print(f"Temperature: {current_temp} °C")
 
-    print(f"Wind: {current_wind_speed} {windspeed_unit} @ {current_wind_dir}°")
+    print(f"Wind: {current_wind_dir}° @ {current_wind_speed} {windspeed_unit}")
 
     if intensity is not None:
         print(f"Preciptiation: {intensity} {precip_type}")
