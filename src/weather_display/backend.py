@@ -3,12 +3,26 @@ import configparser
 from geopy.geocoders import Nominatim
 import time
 from pathlib import Path
+from pathformdirs import user_config_dir
+from importlib.resources import files
+import shutil
 
 from .config.weather_codes import get_weather_info
 
-config = configparser.ConfigParser()
-config_path = Path(__file__).parent / "config" / "config.ini"
-config.read(config_path)
+config_dir = Path(user_config_dir("weather-display"))
+config_path = config_dir / "config.ini"
+
+def load_config():
+    if not config_path.exists():
+        config_dir.mkdir(parents=True, exist_ok=True)
+
+        default_config = files("weather_display.config").joinpath("config.ini")
+        shutil.copy(default_config, config_path)
+
+    config = configparser.ConfigParser()
+    config.read(config_path)
+
+    return config
 
 temperature_unit = config.get('CONFIG', 'temperature_unit')
 windspeed_unit = config.get('CONFIG', 'windspeed_unit')
