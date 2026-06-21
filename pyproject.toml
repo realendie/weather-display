@@ -28,3 +28,6 @@ dependencies = [
 [project.scripts]
 weather-display = "weather_display.display:main"
 weather-location = "weather_display.location:main"
+
+[tool.setuptools.package-data]
+weather-display = ["defaults/*.ini"]
