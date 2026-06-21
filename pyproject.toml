@@ -25,9 +25,12 @@ dependencies = [
     "wcwidth",
 ]
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [project.scripts]
 weather-display = "weather_display.display:main"
 weather-location = "weather_display.location:main"
 
 [tool.setuptools.package-data]
-weather-display = ["config/*.ini"]
+weather_display = ["config/*.ini"]
