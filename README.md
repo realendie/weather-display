@@ -11,8 +11,7 @@ A TUI `weather-display`, using the [**Open-Meteo Free Weather API**](https://ope
 
 
 ## Installation
->[!IMPORTANT] 
->**weather-display** is currently uncompatable with Windows
+>**[IMPORTANT]** `weather-display` is currently uncompatable with Windows
 
 Install `weather-display` with one command using pipx (recommended):
 
@@ -23,7 +22,7 @@ pipx install weather-display
 or you can use normal pip:
 
 ```bash
-pip3 install weather-display
+sudo pip3 install --break-system-packages weather-display
 ```
 
 ## Usage
