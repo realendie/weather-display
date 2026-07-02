@@ -1,5 +1,5 @@
 def main():
-    print ('Loading...')
+    print("Loading...")
 
     import pytermgui as ptg
     from geopy.geocoders import Nominatim
@@ -11,7 +11,6 @@ def main():
     from platformdirs import user_config_dir
     from importlib.resources import files
     import shutil
-    import sys
 
     config_dir = Path(user_config_dir("weather-display"))
     config_path = config_dir / "config.ini"
@@ -28,8 +27,8 @@ def main():
         config.read(config_path)
 
     load_config()
-    LAT = config.get('LOCATION', 'location_lat')
-    LON = config.get('LOCATION', 'location_lon')
+    LAT = config.get("LOCATION", "location_lat")
+    LON = config.get("LOCATION", "location_lon")
 
     def cords_to_city(LAT, LON):
         global city
@@ -40,7 +39,7 @@ def main():
         time.sleep(1)
         location = geolocator.reverse(f"{LAT},{LON}")
 
-        address = location.raw.get('address', {})
+        address = location.raw.get("address", {})
 
         city = address.get("city", "")
         state = address.get("state", "")
@@ -54,10 +53,10 @@ def main():
         location_lat = location.latitude
         location_lon = location.longitude
 
-        config.set('LOCATION', 'location_lat', str(location_lat))
-        config.set('LOCATION', 'location_lon', str(location_lon))
+        config.set("LOCATION", "location_lat", str(location_lat))
+        config.set("LOCATION", "location_lon", str(location_lon))
 
-        with open(config_path, 'w') as configfile:
+        with open(config_path, "w") as configfile:
             config.write(configfile)
 
         manager.stop()
@@ -78,19 +77,19 @@ def main():
             country_field,
         )
 
-        submit_button = ptg.Button("Submit", onclick=lambda *_: submit_info(
-            city_field.value,
-            state_field.value,
-            country_field.value,
-        ))
-
-        window = (
-            ptg.Window(
-                location_fields,
-                submit_button,
-                width=0,
-            )
-            .set_title("Select Location")
+        submit_button = ptg.Button(
+            "Submit",
+            onclick=lambda *_: submit_info(
+                city_field.value,
+                state_field.value,
+                country_field.value,
+            ),
         )
+
+        window = ptg.Window(
+            location_fields,
+            submit_button,
+            width=0,
+        ).set_title("Select Location")
 
         manager.add(window)

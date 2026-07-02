@@ -12,6 +12,7 @@ from .config.weather_codes import get_weather_info
 config_dir = Path(user_config_dir("weather-display"))
 config_path = config_dir / "config.ini"
 
+
 def load_config():
     if not config_path.exists():
         config_dir.mkdir(parents=True, exist_ok=True)
@@ -23,27 +24,30 @@ def load_config():
     config = configparser.ConfigParser()
     config.read(config_path)
 
-load_config()
-temperature_unit = config.get('CONFIG', 'temperature_unit')
-windspeed_unit = config.get('CONFIG', 'windspeed_unit')
-precipitation_unit = config.get('CONFIG', 'precipitation_unit')
-timezone = config.get('CONFIG', 'timezone')
 
-LAT = config.get('LOCATION', 'location_lat')
-LON = config.get('LOCATION', 'location_lon')
+load_config()
+temperature_unit = config.get("CONFIG", "temperature_unit")
+windspeed_unit = config.get("CONFIG", "windspeed_unit")
+precipitation_unit = config.get("CONFIG", "precipitation_unit")
+timezone = config.get("CONFIG", "timezone")
+
+LAT = config.get("LOCATION", "location_lat")
+LON = config.get("LOCATION", "location_lon")
+
 
 def cords_to_city(LAT, LON):
     geolocator = Nominatim(user_agent="weather-display")
     time.sleep(1)
     location = geolocator.reverse(f"{LAT},{LON}")
 
-    address = location.raw.get('address', {})
+    address = location.raw.get("address", {})
 
     city = address.get("city", "")
     state = address.get("state", "")
     country = address.get("country", "")
 
     return city, state, country
+
 
 url = "https://api.open-meteo.com/v1/forecast"
 
@@ -55,7 +59,7 @@ params = {
     "temperature_unit": {temperature_unit},
     "windspeed_unit": {windspeed_unit},
     "precipitation_unit": {precipitation_unit},
-    "timezone": {timezone}
+    "timezone": {timezone},
 }
 
 response = requests.get(url, params=params, timeout=10)
@@ -76,10 +80,11 @@ precip_probability = hourly["precipitation_probability"][0]
 weather_code = hourly["weathercode"][0]
 precip_type, intensity = get_weather_info(weather_code)
 
+
 def display_data():
     print(f"Location: {city}, {state} {country}")
 
-    if  temperature_unit == "fahrenheit":
+    if temperature_unit == "fahrenheit":
         print(f"Temperature: {current_temp} °F")
     elif temperature_unit == "celcius":
         print(f"Temperature: {current_temp} °C")
@@ -93,10 +98,11 @@ def display_data():
 
     print(f"Chance: {precip_probability}%")
 
-    if precipitation_unit == 'inch':
+    if precipitation_unit == "inch":
         print(f"Accumulation: {precip_amount} in")
-    elif precipitation_unit == 'centimeter':
+    elif precipitation_unit == "centimeter":
         print(f"Accumulation: {precip_amount} cm")
+
 
 cords_to_city(LAT, LON)
 city, state, country = cords_to_city(LAT, LON)

@@ -9,8 +9,9 @@ import shutil
 
 from .config.weather_codes import get_weather_info
 
+
 def main():
-    print ("Loading data...")
+    print("Loading data...")
 
     config_dir = Path(user_config_dir("weather-display"))
     config_path = config_dir / "config.ini"
@@ -27,10 +28,10 @@ def main():
         config.read(config_path)
 
     load_config()
-    temperature_unit = config.get('CONFIG', 'temperature_unit')
-    windspeed_unit = config.get('CONFIG', 'windspeed_unit')
-    precipitation_unit = config.get('CONFIG', 'precipitation_unit')
-    timezone = config.get('CONFIG', 'timezone')
+    temperature_unit = config.get("CONFIG", "temperature_unit")
+    windspeed_unit = config.get("CONFIG", "windspeed_unit")
+    precipitation_unit = config.get("CONFIG", "precipitation_unit")
+    timezone = config.get("CONFIG", "timezone")
 
     from .backend import (
         current_temp,
@@ -74,10 +75,13 @@ def main():
         left_column = ptg.Container(
             ptg.Label(f"Location: {city}, {state} {country}"),
             ptg.Label(f"Tempurature: {current_temp} {temp_display_unit}", wrap=False),
-            ptg.Label(f"Wind: {current_wind_dir}° @ {current_wind_speed} {windspeed_unit}", wrap=False),
+            ptg.Label(
+                f"Wind: {current_wind_dir}° @ {current_wind_speed} {windspeed_unit}",
+                wrap=False,
+            ),
         )
 
-        if precipitation_unit == 'inch':
+        if precipitation_unit == "inch":
             precip_unit_display = "in"
         elif precipitation_unit == "centimeters":
             precip_unit_display = "cm"
@@ -85,24 +89,22 @@ def main():
         right_column = ptg.Container(
             ptg.Label(precip_display),
             ptg.Label(f"Chance: %{precip_probability}", wrap=False),
-            ptg.Label(f"Accumulation: {precip_amount} {precip_unit_display}")
+            ptg.Label(f"Accumulation: {precip_amount} {precip_unit_display}"),
         )
 
         # Splitter will create two columns
         splitter = ptg.Splitter(left_column, right_column)
 
         quit_button = ptg.KeyboardButton("Quit", onclick=quit_func, bound="Q")
-        reload_button = ptg.KeyboardButton("Reload Data", onclick=lambda *_: reload_data(manager), bound="R")
+        reload_button = ptg.KeyboardButton(
+            "Reload Data", onclick=lambda *_: reload_data(manager), bound="R"
+        )
         button_split = ptg.Splitter(quit_button, reload_button)
 
-        window = (
-            ptg.Window(
-                splitter,
-                button_split,
-                width=0,
-            )
-            .set_title("weather-display")
-        )
+        window = ptg.Window(
+            splitter,
+            button_split,
+            width=0,
+        ).set_title("weather-display")
 
         manager.add(window)
-
